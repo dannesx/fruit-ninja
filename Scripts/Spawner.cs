@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -8,37 +7,38 @@ public class Spawner : MonoBehaviour
 
     public GameObject[] fruitPrefabs;
 
-    [Header("Spawn Delay")]
     public float minSpawnDelay = 0.25f;
     public float maxSpawnDelay = 1f;
 
-    [Header("Angle")]
     public float minAngle = -15f;
     public float maxAngle = 15f;
 
-    [Header("Force")]
     public float minForce = 18f;
     public float maxForce = 22f;
 
-    [Header("Lifetime")]
     public float maxLifetime = 5f;
 
-    private void Awake(){
+    private void Awake()
+    {
         spawnArea = GetComponent<Collider>();
     }
 
-    private void OnEnable(){
+    private void OnEnable()
+    {
         StartCoroutine(Spawn());
     }
 
-    private void OnDisable(){
+    private void OnDisable()
+    {
         StopAllCoroutines();
     }
 
-    private IEnumerator Spawn(){
+    private IEnumerator Spawn()
+    {
         yield return new WaitForSeconds(2f);
 
-        while(enabled){
+        while (enabled)
+        {
             GameObject prefab = fruitPrefabs[Random.Range(0, fruitPrefabs.Length)];
 
             Vector3 position = new Vector3();
@@ -57,4 +57,5 @@ public class Spawner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
         }
     }
+
 }
